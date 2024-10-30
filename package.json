@@ -1,0 +1,26 @@
+{
+  "name": "manga_scrapers",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanYuuki/Manga_Scrapers.git"
+  },
+  "author": "Ryan_Yuuki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyanYuuki/Manga_Scrapers/issues"
+  },
+  "homepage": "https://github.com/RyanYuuki/Manga_Scrapers#readme",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "express": "^4.21.1",
+    "expressjs": "^1.0.1"
+  }
+}
