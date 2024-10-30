@@ -1,4 +1,4 @@
-# Manga API
+# Enoki API
 
 Welcome to the ultimate Manga API! This API delivers popular manga sources directly to your fingertips, allowing seamless access to manga titles, chapters, and more from some of the best manga sites.
 
