@@ -5,7 +5,8 @@ const {
   scrapeNewestMangas,
   scrapeCompletedMangas,
   scrapePopularMangas,
-} = require("../scrappers/manganato");
+  scrapeMangaSearch,
+} = require("../scrappers/mangaNato");
 
 const getMangaDetailsMangaNato = async (req, res) => {
   const mangaId = req.params.id;
@@ -79,6 +80,19 @@ const getCompletedMangas = async (req, res) => {
   }
 };
 
+const getMangaSearch = async (req, res) => {
+  const query = req.params.query || "attack on titan";
+  const page = req.params.page || 1;
+  try {
+    const data = await scrapeMangaSearch(query, page);
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      error: `Error fetching the manga details from MangaNato : ${err}`,
+    });
+  }
+};
+
 module.exports = {
   getMangaDetailsMangaNato,
   getMangaChapterImages,
@@ -86,4 +100,5 @@ module.exports = {
   getCompletedMangas,
   getNewestMangas,
   getPopularMangas,
+  getMangaSearch,
 };

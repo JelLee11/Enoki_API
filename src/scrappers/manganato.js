@@ -179,8 +179,72 @@ const scrapeChapterImages = async (mangaId, chapterId) => {
       nextChapterId,
       images,
       chapterList,
+      totalImages: images.length,
     },
   };
+};
+
+const scrapeMangaSearch = async (query, page = 1) => {
+  const formattedQuery = query.replace(/ /g, "_");
+  const url = `https://manganato.com/search/story/${formattedQuery}`;
+
+  try {
+    const { data } = await axios.get(url);
+
+    const $ = cheerio.load(data);
+    const searchItems = $(".panel-search-story .search-story-item");
+
+    const mangaList = searchItems
+      .map((_, element) => {
+        const titleElement = $(element).find(".item-title");
+        const title = titleElement.text().trim() || "N/A";
+        const link = titleElement.attr("href") || "";
+        const imageUrl = $(element).find(".item-img img").attr("src") || "";
+        const rating = $(element).find(".item-rate").text().trim() || "N/A";
+        const author = $(element).find(".item-author").text().trim() || "N/A";
+        const updatedElement = $(element).find(".item-time");
+
+        const updatedAt =
+          updatedElement.length > 0
+            ? updatedElement.eq(0).text().replace("Updated :", "").trim()
+            : "N/A";
+        const views =
+          updatedElement.length > 1
+            ? updatedElement.eq(1).text().replace("View :", "").trim()
+            : "N/A";
+
+        const chapters = $(element)
+          .find(".item-chapter")
+          .map((_, chapterEl) => {
+            const chapterTitle = $(chapterEl)?.text()?.trim() || "";
+            const chapterLink = $(chapterEl).attr("href") || "";
+            const chapterId = chapterLink?.split("/")?.pop() || "";
+
+            return {
+              chapterTitle,
+              chapterId,
+            };
+          })
+          .get();
+
+        return {
+          id: link.split("/").pop(),
+          title,
+          image: imageUrl,
+          chapters,
+          rating,
+          author,
+          updatedAt,
+          views,
+        };
+      })
+      .get();
+
+    return mangaList;
+  } catch (error) {
+    console.error("Error occurred while scraping search data:", error.message);
+    return [];
+  }
 };
 
 const scrapeLatestMangas = async (page = 1) => {
@@ -218,4 +282,5 @@ module.exports = {
   scrapeLatestMangas,
   scrapeNewestMangas,
   scrapePopularMangas,
+  scrapeMangaSearch,
 };
