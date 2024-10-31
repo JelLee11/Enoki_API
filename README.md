@@ -1,3 +1,4 @@
+```markdown
 <div align="center">
   <img src="assets/logo.png" alt="Enoki API Logo" width="300"/>
   
@@ -51,6 +52,10 @@ Search each source independently with the following endpoints:
   - **`GET /mangabat/search/:query/:page?`**
     - Searches for manga titles on Mangabat by query. Optional pagination with `page`, defaulting to 1.
 
+- **MangaFire Search**
+  - **`GET /mangafire/search/:query/:page?`**
+    - Searches for manga titles on MangaFire by query. Optional pagination with `page`, defaulting to 1.
+
 ### Manganato Routes
 
 | Endpoint                               | Description                                    |
@@ -72,6 +77,17 @@ Search each source independently with the following endpoints:
 | **`GET /mangabat/popular/:page?`**    | Lists popular manga titles (paginated).        |
 | **`GET /mangabat/newest/:page?`**     | Lists the newest manga titles (paginated).     |
 | **`GET /mangabat/completed/:page?`**  | Lists completed manga titles (paginated).      |
+
+### MangaFire Routes
+
+| Endpoint                               | Description                                    |
+| -------------------------------------- | ---------------------------------------------- |
+| **`GET /mangafire/details/:id`**       | Fetches details of a specific manga by ID.     |
+| **`GET /mangafire/read/:id`**          | Retrieves images for a specific manga chapter. |
+| **`GET /mangafire/latest/:page?`**     | Lists the latest manga titles (paginated).     |
+| **`GET /mangafire/popular/:page?`**    | Lists popular manga titles (paginated).        |
+| **`GET /mangafire/newest/:page?`**     | Lists the newest manga titles (paginated).     |
+| **`GET /mangafire/completed/:page?`**  | Lists completed manga titles (paginated).      |
 
 ## Getting Started
 
@@ -111,6 +127,7 @@ Test the API by visiting endpoints like:
 
 - **`http://localhost:5000/manganato/details/{id}`** – Get manga details
 - **`http://localhost:5000/mangabat/search/query/page`** – Search for manga
+- **`http://localhost:5000/mangafire/search/query/page`** – Search for manga on MangaFire
 
 ## Folder Structure
 
@@ -124,8 +141,8 @@ enoki-api/
 ├── assets/                   # Static assets including logo
 ├── .env                      # Environment variables (gitignored)
 ├── package.json             # Project dependencies and scripts
-├── server.js               # Main server entry point
-└── README.md               # Documentation
+├── server.js                # Main server entry point
+└── README.md                # Documentation
 ```
 
 ## Contributing
@@ -144,3 +161,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name – [rehank220358@gmail.com](mailto:rehank220358@gmail.com)  
 Project Link: [https://github.com/RyanYuuki/Enoki_API](https://github.com/RyanYuuki/Enoki_API)
+```
