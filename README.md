@@ -1,4 +1,3 @@
-```markdown
 <div align="center">
   <img src="assets/logo.png" alt="Enoki API Logo" width="300"/>
   
@@ -161,4 +160,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name – [rehank220358@gmail.com](mailto:rehank220358@gmail.com)  
 Project Link: [https://github.com/RyanYuuki/Enoki_API](https://github.com/RyanYuuki/Enoki_API)
-```
