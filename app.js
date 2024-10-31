@@ -1,6 +1,7 @@
 const express = require("express");
 const mangaNatoRoutes = require("./src/routes/mangaNatoRoutes");
-const mangaFireRoutes = require("./src/routes/mangaBatRoutes");
+const managBatRoutes = require("./src/routes/mangaBatRoutes");
+const mangaKakalotRoutes = require("./src/routes/mangaKakalotRoutes");
 const app = express();
 const port = 5000;
 
@@ -14,7 +15,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/manganato", mangaNatoRoutes);
-app.use("/mangabat", mangaFireRoutes);
+app.use("/mangabat", managBatRoutes);
+app.use("/mangakakalot", mangaKakalotRoutes);
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);

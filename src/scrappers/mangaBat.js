@@ -65,7 +65,7 @@ const scrapeMangaSearch = async (query, page = 1) => {
         const imageUrl = $(element).find(".item-img img").attr("src") || "";
         const rating = $(element).find(".item-rate").text().trim() || "N/A";
         const author = $(element).find(".item-author").text().trim() || "N/A";
-        const updatedAt =
+        const updated =
           $(element)
             .find(".item-time")
             .first()
@@ -85,7 +85,7 @@ const scrapeMangaSearch = async (query, page = 1) => {
           image: imageUrl,
           rating,
           author,
-          updatedAt,
+          updated,
           views,
         };
       })

@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/RyanYuuki/Manga_Scrapers/issues"
   },
-  "homepage": "https://github.com/RyanYuuki/Manga_Scrapers#readme",
+  "homepage": "https://github.com/RyanYuuki/Enoki_API#readme",
   "description": "",
   "dependencies": {
     "axios": "^1.7.7",
