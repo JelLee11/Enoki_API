@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.jpg" alt="Enoki API Logo" width="400"/>
+  <img src="assets/logo.png" alt="Enoki API Logo" width="400"/>
   
   # Enoki API
   
