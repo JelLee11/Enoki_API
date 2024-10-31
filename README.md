@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.png" alt="Enoki API Logo" width="400"/>
+  <img src="assets/logo.png" alt="Enoki API Logo" width="300"/>
   
   # Enoki API
   
@@ -14,7 +14,8 @@
 
   <br />
 
-  [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRyanYuuki%2FEnoki_API)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRyanYuuki%2FEnoki_API)
+
 </div>
 
 ## Features
@@ -42,6 +43,7 @@
 Search each source independently with the following endpoints:
 
 - **Manganato Search**
+
   - **`GET /manganato/search/:query/:page?`**
     - Searches for manga titles on Manganato by query. Optional pagination with `page`, defaulting to 1.
 
@@ -81,12 +83,14 @@ Search each source independently with the following endpoints:
 ### Installation
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/RyanYuuki/Enoki_API.git
    cd Enoki_API
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -94,6 +98,7 @@ Search each source independently with the following endpoints:
 3. Set up environment variables in a `.env` file as needed.
 
 4. Run the server:
+
    ```bash
    npm start
    ```
@@ -103,6 +108,7 @@ Search each source independently with the following endpoints:
 ### Usage
 
 Test the API by visiting endpoints like:
+
 - **`http://localhost:5000/manganato/details/{id}`** – Get manga details
 - **`http://localhost:5000/mangabat/search/query/page`** – Search for manga
 

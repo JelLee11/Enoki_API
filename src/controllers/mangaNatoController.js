@@ -6,7 +6,7 @@ const {
   scrapeCompletedMangas,
   scrapePopularMangas,
   scrapeMangaSearch,
-} = require("../scrappers/mangaNato");
+} = require("../scrappers/manganato");
 
 const getMangaDetailsMangaNato = async (req, res) => {
   const mangaId = req.params.id;
