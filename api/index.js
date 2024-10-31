@@ -1,6 +1,6 @@
 const express = require("express");
 const mangaNatoRoutes = require("../src/routes/mangaNatoRoutes");
-
+const mangaBatRoutes = require("../src/routes/mangaBatRoutes");
 const app = express();
 
 app.use(express.json());
@@ -13,4 +13,5 @@ app.get("/", (req, res) => {
 });
 
 app.use("/manganato", mangaNatoRoutes);
+app.use("/mangabat", mangaBatRoutes);
 module.exports = app;
