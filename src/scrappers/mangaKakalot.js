@@ -181,77 +181,58 @@ async function scrapeMangaSearch(query) {
   }
 }
 
-async function scrapeChapterImages(mangaId, chapterId) {
+const scrapeChapterImages = async (mangaId, chapterId) => {
   const url = `${baseUrl}${mangaId}/${chapterId}`;
-  let index = 0;
+  const { data } = await axios.get(url, {
+    referrer: `${baseUrl}`,
+  });
+  console.log(url);
+  const $ = cheerio.load(data);
 
-  try {
-    const response = await axios.get(url, {
-      headers: { Referer: baseUrl },
-    });
-    if (response.status === 200) {
-      const $ = cheerio.load(response.data);
-      const title = $(".panel-chapter-info-top h1")
-        .text()
-        .split("chapter")[0]
-        .trim()
-        .toUpperCase();
-      const currentChapter =
-        "Chapter" +
-        $(".panel-chapter-info-top h1")
-          .text()
-          .split("chapter")[1]
-          .toUpperCase();
+  let title = $(".panel-breadcrumb > a:nth-child(3)").text().trim();
+  let currentChapter = $(".panel-breadcrumb > a:nth-child(5)").text().trim();
+  let nextChapterId =
+    $(".navi-change-chapter-btn-next")?.attr("href")?.split("/")?.pop() ?? "";
+  let prevChapterId =
+    $(".navi-change-chapter-btn-prev")?.attr("href")?.split("/")?.pop() ?? "";
+  let chapterList = $(".container:nth-child(1) > .panel-navigation > select")
+    .find("option")
+    .map((index, element) => {
+      const id = "chapter-" + $(element).attr("data-c");
+      const title = $(element).text().trim();
+      const isCurrent = $(element).attr("selected") !== undefined;
 
-      const chapterListIds = $(".navi-change-chapter option")
-        .map((_, option) => ({
-          id: `chapter-${$(option).attr("data-c")}`,
-          name: $(option).text().trim(),
-        }))
-        .get();
-
-      const images = $(".container-chapter-reader img")
-        .map((_, img) => {
-          const imgUrl = $(img).attr("src");
-          index++;
-          return {
-            title: $(img).attr("title") || "",
-            image: imgUrl,
-          };
-        })
-        .get();
-
-      const nextChapterLink =
-        $(".navi-change-chapter-btn .navi-change-chapter-btn-next").attr(
-          "href"
-        ) || "";
-      const prevChapterLink =
-        $(".navi-change-chapter-btn .navi-change-chapter-btn-prev").attr(
-          "href"
-        ) || "";
-
-      const assets = {
-        title: title,
-        currentChapter: currentChapter,
-        nextChapterId: nextChapterLink.split("/").pop(),
-        prevChapterId: prevChapterLink.split("/").pop(),
-        chapterListIds: chapterListIds,
-        images: images,
-        totalImages: index,
+      return {
+        id,
+        title,
+        isCurrent,
       };
+    })
+    .get();
+  let images = $(".body-site")
+    .find("img")
+    .map((index, element) => {
+      return {
+        page: index,
+        url: $(element).attr("src"),
+      };
+    })
+    .get();
 
-      return assets;
-    } else {
-      console.log(
-        `Failed to load chapter details, status code: ${response.status}`
-      );
-      return {};
-    }
-  } catch (error) {
-    console.log("Error:", error.message);
-    return {};
-  }
-}
+  return {
+    message:
+      "To get access of these images, you would need to add referrer of https://chapmanganato.to/ in your headers on image urls",
+    result: {
+      title,
+      currentChapter,
+      prevChapterId,
+      nextChapterId,
+      images,
+      chapterList,
+      totalImages: images.length,
+    },
+  };
+};
 
 const scrapeLatestMangas = async (page = 1) => {
   const url =
